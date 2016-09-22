@@ -1,0 +1,15 @@
+body {
+	font-family: 'Press Start 2P', cursive;
+	color: white;
+	background-color: black;
+}
+
+.jumbotron {
+    height: 350px;
+    background: #000 url("../images/jumbo.jpg") no-repeat center center;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    color: white;
+}

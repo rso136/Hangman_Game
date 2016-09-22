@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+
+<body>
+<div class="container">
+	
+	<div class="jumbotron">
+		<h2>8-Bit Hangman</h2>
+	</div>
+	<div class="row">
+		<div class="col-md-6" id="wordBox">
+			<p>Current Word: <span id="currentWord"></span></p>
+			<br>
+			<p>Words Remaining: <span id="wordsRemaining"></span>  </p>
+			<p><span id="results"></span></p>
+		</div>
+		<div class="col-md-6" id="guessBox">
+			<p>Score: <span id="points"></span></p>
+			<br>
+			<p>Guesses Remaining: <span id="guessesLeft"></span></p>
+			<br>
+			<p>Letters Guessed: <span id="lettersGuessed"></span></p>
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-md-6" id="answerBox">
+		<br>
+		<p>Answers: </p>
+			<ul id="list">
+			</ul>
+	</div>
+	</div>	
+
+
+</div>
+<script src="script.js"></script>
+</body>
+
+</html>
