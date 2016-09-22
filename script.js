@@ -9,9 +9,18 @@ var letterArray = [];
 var guesses = 10;
 var points = 0;
 
-document.getElementById('guessesLeft').innerHTML = guesses;
-document.getElementById('points').innerHTML = points;
-document.getElementById('wordsRemaining').innerHTML = wordArray.length;
+//document.getElement variables
+
+var currentWord = document.getElementById('currentWord');
+var results = document.getElementById('results');
+var guessesLeft = document.getElementById('guessesLeft');
+var lettersGuessed = document.getElementById('lettersGuessed');
+var wordsRemaining = document.getElementById('wordsRemaining');
+var score = document.getElementById('points');
+
+guessesLeft.innerHTML = guesses;
+score.innerHTML = points;
+wordsRemaining.innerHTML = wordArray.length;
 selectWord();
 
 function selectWord() {
@@ -27,7 +36,7 @@ function selectWord() {
 
 	wordDisplay = wordBank.join(" ");
 
-	document.getElementById('currentWord').innerHTML = wordDisplay;
+	currentWord.innerHTML = wordDisplay;
 }
 
 function letterGuess() {
@@ -50,45 +59,45 @@ function letterGuess() {
 				wordDisplay = wordBank.join(" ");
 			}
 		}
-		document.getElementById('currentWord').innerHTML = wordDisplay;	
-		document.getElementById('results').innerHTML = "<i>You are correct!</i>";
+		currentWord.innerHTML = wordDisplay;	
+		results.innerHTML = "<i>You are correct!</i>";
 	}
 	else {
-		document.getElementById('results').innerHTML = "<i>You are incorrect!</i>";
+		results.innerHTML = "<i>You are incorrect!</i>";
 		guesses--;
-		document.getElementById('guessesLeft').innerHTML = guesses;
+		guessesLeft.innerHTML = guesses;
 	}
 
 	if (letterCount === 0) {
 
 		var index = wordArray.indexOf(wordSelected);
 		wordArray.splice(index, 1);
-		document.getElementById('wordsRemaining').innerHTML = wordArray.length;
+		wordsRemaining.innerHTML = wordArray.length;
 		points++;
 
 		if (points === 12) {
-			document.getElementById('results').innerHTML = "<i>You have guessed all the words! You win! Press any key to restart!</i>"
-			
+			score.innerHTML = points;
+			results.innerHTML = "<i>You have guessed all the words! You win! Press any key to restart!</i>"
 			document.onkeyup = function(event) {
 				location.reload();
 			}
 		}
 		else {
 			guesses = 10;
-			document.getElementById('points').innerHTML = points;
-			document.getElementById('guessesLeft').innerHTML = guesses;
+			score.innerHTML = points;
+			guessesLeft.innerHTML = guesses;
 			document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");
 			wordBank = [];
 			letterArray = [];
 			showGuesses = letterArray.join();
-			document.getElementById('lettersGuessed').innerHTML = showGuesses;
-			document.getElementById('results').innerHTML = "<i>You guessed the word correctly! Try guessing the new word!</i>"
+			lettersGuessed.innerHTML = showGuesses;
+			results.innerHTML = "<i>You guessed the word correctly! Try guessing the new word!</i>"
 			selectWord();
 		}
 	}
 
 	if (guesses === 0) {
-		document.getElementById('results').innerHTML = "<i>You have run out of guesses. Game over. Press any key to restart!</i>"
+		results.innerHTML = "<i>You have run out of guesses. Game over. Press any key to restart!</i>"
 		document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");		
 		document.onkeyup = function(event) {
 			location.reload();
@@ -102,7 +111,7 @@ document.onkeyup = function(event) {
 
 	letterArray.push(letterGuessed);
 	showGuesses = letterArray.join();
-	document.getElementById('lettersGuessed').innerHTML = showGuesses;
+	lettersGuessed.innerHTML = showGuesses;
 	letterGuess();
 
 }
