@@ -3,11 +3,14 @@ var wordBank = [];
 var wordArray = ["mario", "luigi", "link", "zelda", "samus", "littlemac", "megaman", "solidsnake", "ganon", "rygar", "toad", "ryu"];
 var wordSelected;
 var letterCount;
+var letterFound;
 var wordDisplay;
 var letterGuessed;
+var firstClick = true;
 var letterArray = [];
 var guesses = 10;
 var points = 0;
+var chances = 3;
 
 //document.getElement variables
 
@@ -17,10 +20,13 @@ var guessesLeft = document.getElementById('guessesLeft');
 var lettersGuessed = document.getElementById('lettersGuessed');
 var wordsRemaining = document.getElementById('wordsRemaining');
 var score = document.getElementById('points');
+var chancesLeft = document.getElementById('chancesLeft');
 
 guessesLeft.innerHTML = guesses;
 score.innerHTML = points;
 wordsRemaining.innerHTML = wordArray.length;
+chancesLeft.innerHTML = chances;
+
 selectWord();
 
 function selectWord() {
@@ -41,7 +47,8 @@ function selectWord() {
 
 function letterGuess() {
 
-	var letterFound = false;
+	letterFound = false;
+	notInArray = null;
 
 	for (var i = 0; i < lettersInWord.length; i++) {
 
@@ -59,8 +66,9 @@ function letterGuess() {
 				wordDisplay = wordBank.join(" ");
 			}
 		}
-		currentWord.innerHTML = wordDisplay;	
+		currentWord.innerHTML = wordDisplay;
 		results.innerHTML = "<i>You are correct!</i>";
+
 	}
 	else {
 		results.innerHTML = "<i>You are incorrect!</i>";
@@ -97,21 +105,73 @@ function letterGuess() {
 	}
 
 	if (guesses === 0) {
-		results.innerHTML = "<i>You have run out of guesses. Game over. Press any key to restart!</i>"
-		document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");		
-		document.onkeyup = function(event) {
+		chances--;
+		chancesLeft.innerHTML = chances;
+		if (chances === 0) {
+			results.innerHTML = "<i>You have run out of chances. Game over. Press any key to restart!</i>"
+			document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");		
+			document.onkeyup = function(event) {
 			location.reload();
+			}
 		}
+		else {
+			guesses = 10;
+			guessesLeft.innerHTML = guesses;
+			wordBank = [];
+			letterArray = [];
+			showGuesses = letterArray.join();
+			lettersGuessed.innerHTML = showGuesses;
+			results.innerHTML = "<i>You have run out of guesses. Try guessing the next word.</i>";
+			selectWord();
+		}
+	}
+}
 
+
+function processLetter() {
+
+		letterArray.push(letterGuessed);
+		console.log(letterArray);
+		showGuesses = letterArray.join();
+		lettersGuessed.innerHTML = showGuesses;
+		letterGuess();
+}
+
+function letterCheck() {
+
+	var inArray = false;
+
+	console.log('Checking letter');
+	for (var i = 0; i < letterArray.length; i++) {
+		if (letterGuessed == letterArray[i]) {
+			console.log('Letter found in array');
+			results.innerHTML = "<i>You already guessed that letter. Guess again.</i>";
+			inArray = true;
+		}
+	}
+	
+	if (inArray === false) {
+		processLetter();
+	}
+	else {
+		console.log("Letter already used");
 	}
 }
 
 document.onkeyup = function(event) {
-	letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
 
-	letterArray.push(letterGuessed);
-	showGuesses = letterArray.join();
-	lettersGuessed.innerHTML = showGuesses;
-	letterGuess();
+	letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+	console.log(letterGuessed);
+
+	if (firstClick === true) {
+		processLetter();
+		firstClick = false;
+		console.log(firstClick);
+	}
+	else {
+		letterCheck();
+	}
+
+
 
 }
