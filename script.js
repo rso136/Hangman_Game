@@ -158,7 +158,7 @@ function letterCheck() {
 	}
 }
 
-document.onkeyup = function(event) {
+document.onkeyup = function() {
 
 	letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
 	console.log(letterGuessed);
@@ -171,7 +171,4 @@ document.onkeyup = function(event) {
 	else {
 		letterCheck();
 	}
-
-
-
 }
