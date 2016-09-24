@@ -26,7 +26,7 @@ var hintSpan = document.getElementById('hintSpan');
 
 //hint descriptions 
 
-var hints = ["The iconic plumber", "The plumber's brother", "The elvish green hero", "The princess in distress", "Alien fighting heroine", "Mike Tyson's challenger", "The little blue android", "Military super soldier", "The villain of the golden cartridge", "The warrior of Argus", "'Our princess is in another castle.'", "Nintendo's Ninja" ]
+var hints = ["The iconic plumber", "The plumber's brother", "The elvish hero garbed in green", "The princess in distress", "Alien fighting heroine", "Mike Tyson's challenger", "The little blue android", "Military super soldier", "The villain of the golden cartridge", "The warrior of Argus", "'Our princess is in another castle.'", "Nintendo's Ninja" ]
 
 guessesLeft.innerHTML = guesses;
 score.innerHTML = points;
@@ -100,6 +100,7 @@ function letterGuess() {
 		if (points === 12) {
 			score.innerHTML = points;
 			results.innerHTML = "<i>You have guessed all the words! You win! Press any key to restart!</i>"
+			results.className += " blink2";
 			document.onkeyup = function(event) {
 				location.reload();
 			}
