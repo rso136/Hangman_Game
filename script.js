@@ -11,6 +11,7 @@ var letterArray = [];
 var guesses = 10;
 var points = 0;
 var chances = 3;
+var arrayNum;
 
 //document.getElement variables
 
@@ -21,6 +22,11 @@ var lettersGuessed = document.getElementById('lettersGuessed');
 var wordsRemaining = document.getElementById('wordsRemaining');
 var score = document.getElementById('points');
 var chancesLeft = document.getElementById('chancesLeft');
+var hintSpan = document.getElementById('hintSpan');
+
+//hint descriptions 
+
+var hints = ["The iconic plumber", "The plumber's brother", "The elvish green hero", "The princess in distress", "Alien fighting heroine", "Mike Tyson's challenger", "The little blue android", "Military super soldier", "The villain of the golden cartridge", "The warrior of Argus", "'Our princess is in another castle.'", "Nintendo's Ninja" ]
 
 guessesLeft.innerHTML = guesses;
 score.innerHTML = points;
@@ -30,8 +36,13 @@ chancesLeft.innerHTML = chances;
 selectWord();
 
 function selectWord() {
-		
-	wordSelected = wordArray[Math.floor(Math.random() * wordArray.length)];
+
+	arrayNum = Math.floor(Math.random() * wordArray.length);
+	
+	wordSelected = wordArray[arrayNum];
+	hintSpan.innerHTML = hints[arrayNum];
+	console.log(wordSelected);
+	console.log(hints[arrayNum]);
 	
 	lettersInWord = wordSelected.split("");
 	letterCount = lettersInWord.length;
@@ -41,6 +52,8 @@ function selectWord() {
 	}
 
 	wordDisplay = wordBank.join(" ");
+
+
 
 	currentWord.innerHTML = wordDisplay;
 }
@@ -80,6 +93,7 @@ function letterGuess() {
 
 		var index = wordArray.indexOf(wordSelected);
 		wordArray.splice(index, 1);
+		hints.splice(index, 1);
 		wordsRemaining.innerHTML = wordArray.length;
 		points++;
 
