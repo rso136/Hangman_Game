@@ -36,6 +36,6 @@ body {
 }
 
 .blink2 {
-  animation: blink 2s step-start 0s infinite;
-  -webkit-animation: blink 2s step-start 0s infinite;  
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;  
 }

@@ -8,10 +8,14 @@ var wordDisplay;
 var letterGuessed;
 var firstClick = true;
 var letterArray = [];
-var guesses = 10;
+var guesses = 7;
 var points = 0;
 var chances = 3;
 var arrayNum;
+var baseUrl = "assets/sounds/";
+var right = "right.wav";
+var wrong = "wrong.wav";
+var gameover = "gameover.wav";
 
 //document.getElement variables
 
@@ -81,12 +85,14 @@ function letterGuess() {
 		}
 		currentWord.innerHTML = wordDisplay;
 		results.innerHTML = "<i>You are correct!</i>";
+		new Audio(baseUrl + right).play();
 
 	}
 	else {
 		results.innerHTML = "<i>You are incorrect!</i>";
 		guesses--;
 		guessesLeft.innerHTML = guesses;
+		new Audio(baseUrl + wrong).play();
 	}
 
 	if (letterCount === 0) {
@@ -106,7 +112,7 @@ function letterGuess() {
 			}
 		}
 		else {
-			guesses = 10;
+			guesses = 7;
 			score.innerHTML = points;
 			guessesLeft.innerHTML = guesses;
 			document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");
@@ -125,12 +131,13 @@ function letterGuess() {
 		if (chances === 0) {
 			results.innerHTML = "<i>You have run out of chances. Game over. Press any key to restart!</i>"
 			document.getElementById('list').insertAdjacentHTML('afterend', "<li>" + wordSelected + "</li>");		
+			new Audio(baseUrl + gameover).play();
 			document.onkeyup = function(event) {
 			location.reload();
 			}
 		}
 		else {
-			guesses = 10;
+			guesses = 7;
 			guessesLeft.innerHTML = guesses;
 			wordBank = [];
 			letterArray = [];
